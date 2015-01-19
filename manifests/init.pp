@@ -9,7 +9,7 @@ class windows_tableau (
         File { source_permissions => ignore }
         if $type == 'local'{
           $tablue_path = "C:\\Users\\Administrator\\Desktop\\TableauServer-64bit.exe"
-          file { 'c:\\ProgramData':
+          file { 'c:\\ProgramData\\tableau.exe':
             ensure  => file,
             source_permissions => ignore,
             source  => "puppet:///${from}"
@@ -17,8 +17,9 @@ class windows_tableau (
         }
         if $type == 'remote'{
           download_file { "Download Tableau" :
-            url => 'https://downloads.tableausoftware.com/tssoftware/TableauServer-64bit.exe',
-            destination_directory => 'c:\\ProgramData'
+            url => $from,
+            destination_directory => 'c:\\ProgramData',
+            destination_file => 'tableau.exe'
           }
           $tablue_path = "C:\Users\Administrator\Desktop\TableauServer-64bit1.exe"
         }

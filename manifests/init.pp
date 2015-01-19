@@ -2,6 +2,7 @@ class windows_tableau (
   $ensure   = 'enabled',
   $type = undef,
   $from = undef,
+  $version = undef,
 ){
   case $ensure {
     'enabled', 'present': {
@@ -31,6 +32,11 @@ class windows_tableau (
           provider => powershell,
           # extended timeout cause Tableau is SLOW!
           timeout => 90000
+        }->
+        exec { 'perform Tableau Setup':
+          command  => template('windows_tableau/initial_setup.ps1.erb'),
+          creates => 'C:\Program Files\Tableau\Tableau Server\initial_setup.flg',
+          provider => 'powershell'
         }
       }
     }

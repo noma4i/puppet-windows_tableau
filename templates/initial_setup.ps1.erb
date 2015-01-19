@@ -1,8 +1,7 @@
 Set-Location -Path "c:\Program Files\Tableau\Tableau Server\<%= scope.lookupvar('windows_tableau::version') %>\bin"
-iex "tabadmin set wgserver.trusted_hosts '103.249.57.179'"
-iex "tabadmin set vizqlserver.protect_sessions false"
-iex "tabadmin set wgserver.extended_trusted_ip_checking false"
-iex "tabadmin configure"
-iex "tabadmin restart"
+iex ".\tabadmin set wgserver.trusted_hosts '<%= scope.lookupvar('windows_tableau::trusted_host') %>'"
+iex ".\tabadmin set vizqlserver.protect_sessions false"
+iex ".\tabadmin set wgserver.extended_trusted_ip_checking false"
+iex ".\tabadmin configure"
+iex ".\tabadmin restart"
 
-Set-Content C:\Program Files\Tableau\Tableau Server\initial_setup.flg "done"

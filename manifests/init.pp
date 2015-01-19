@@ -3,6 +3,7 @@ class windows_tableau (
   $type = undef,
   $from = undef,
   $version = undef,
+  $trusted_host = undef
 ){
   case $ensure {
     'enabled', 'present': {

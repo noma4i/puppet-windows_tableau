@@ -1,14 +1,34 @@
 class windows_tableau (
-  $ensure   = 'enabled'
+  $ensure   = 'enabled',
+  $type = undef,
+  $from = undef,
 ){
   case $ensure {
     'enabled', 'present': {
       if $osfamily == 'windows' {
         File { source_permissions => ignore }
-        $tablue_path = "C:\Users\Administrator\Desktop\TableauServer-64bit.exe"
+        if $type == 'local'{
+          $tablue_path = "C:\\Users\\Administrator\\Desktop\\TableauServer-64bit.exe"
+          file { 'c:\\ProgramData':
+            ensure  => file,
+            source_permissions => ignore,
+            source  => "puppet:///${from}"
+          }
+        }
+        if $type == 'remote'{
+          download_file { "Download Tableau" :
+            url => 'https://downloads.tableausoftware.com/tssoftware/TableauServer-64bit.exe',
+            destination_directory => 'c:\\ProgramData'
+          }
+          $tablue_path = "C:\Users\Administrator\Desktop\TableauServer-64bit1.exe"
+        }
         exec { 'Setup Tableau':
           command => "${tablue_path} /verysilent",
           alias => 'tableau-setup',
+          creates => 'C:\Program Files\Tableau\Tableau Server\unins000.dat',
+          provider => powershell,
+          onlyif => "if(Test-Path -Path '${tablue_path}') { exit 1 } else { exit 0 }",
+
           # extended timeout cause Tableau is SLOW!
           timeout => 90000
         }

@@ -38,6 +38,10 @@ class windows_tableau (
           command  => template('windows_tableau/initial_setup.ps1.erb'),
           creates => 'C:\Program Files\Tableau\Tableau Server\initial_setup.flg',
           provider => 'powershell'
+        }->
+        file { 'C:\\Program Files\\Tableau\\Tableau Server\\initial_setup.flg':
+          ensure  => file,
+          source_permissions => ignore
         }
       }
     }

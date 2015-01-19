@@ -1,9 +1,14 @@
 class windows_tableau (
+  $ensure   = 'enabled'
 ){
- case $ensure {
-  'present': {
-    exec { 'Setup Tableau':
-      command => 'PS C:\Users\Administrator\Desktop\TableauServer-64bit.exe /verysilent',
+  case $ensure {
+    'enabled', 'present': {
+      exec { 'Setup Tableau':
+        command => 'C:\Users\Administrator\Desktop\TableauServer-64bit.exe /verysilent',
+      }
     }
- }
+    default: {
+      fail("Invalid ensure option!\n")
+    }
+  }
 }

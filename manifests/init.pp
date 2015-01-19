@@ -19,7 +19,8 @@ class windows_tableau (
           download_file { "Download Tableau" :
             url => $from,
             destination_directory => 'c:\\ProgramData',
-            destination_file => 'tableau.exe'
+            destination_file => 'tableau.exe',
+            timeout => 90000
           }
           $tablue_path = "C:\Users\Administrator\Desktop\TableauServer-64bit1.exe"
         }
@@ -28,8 +29,6 @@ class windows_tableau (
           alias => 'tableau-setup',
           creates => 'C:\Program Files\Tableau\Tableau Server\unins000.dat',
           provider => powershell,
-          onlyif => "if(Test-Path -Path '${tablue_path}') { exit 1 } else { exit 0 }",
-
           # extended timeout cause Tableau is SLOW!
           timeout => 90000
         }

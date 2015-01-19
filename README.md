@@ -1,6 +1,6 @@
 # windows_tableau
 
-#### WIP
+#### How to use
 
 Setup from remote url. Tableau official download site/
 ```puppet
@@ -19,3 +19,6 @@ Setup from puppet server
       from => 'TableauServer-64bit.exe'
   }
 ```
+#### Limitations
+
+If you are going to download Tableau with puppet from remote server, make sure that it will be fast enough. Puppet download known to be fussy about timeout. I'v made changes there but pull request is still pending https://github.com/opentable/puppet-download_file/pull/17

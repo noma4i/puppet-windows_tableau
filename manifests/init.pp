@@ -3,8 +3,15 @@ class windows_tableau (
 ){
   case $ensure {
     'enabled', 'present': {
-      exec { 'Setup Tableau':
-        command => 'C:\Users\Administrator\Desktop\TableauServer-64bit.exe /verysilent',
+      if $osfamily == 'windows' {
+        File { source_permissions => ignore }
+        $tablue_path = "C:\Users\Administrator\Desktop\TableauServer-64bit.exe"
+        exec { 'Setup Tableau':
+          command => "${tablue_path} /verysilent",
+          alias => 'tableau-setup',
+          # extended timeout cause Tableau is SLOW!
+          timeout => 90000
+        }
       }
     }
     default: {

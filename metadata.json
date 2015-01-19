@@ -4,9 +4,9 @@
   "author": "noma4i",
   "summary": "Install Tableau server",
   "license": "Apache 2.0",
-  "source": "https://github.com/noma4i/puppet-windows-tableau",
-  "project_page": "https://github.com/noma4i/puppet-windows-tableau",
-  "issues_url": "https://github.com/noma4i/puppet-windows-tableau/issues",
+  "source": "https://github.com/noma4i/puppet-windows_tableau",
+  "project_page": "https://github.com/noma4i/puppet-windows_tableau",
+  "issues_url": "https://github.com/noma4i/puppet-windows_tableau/issues",
   "dependencies": [
     {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
     {"name":"opentable-download_file","version_requirement":">= 1.1.0"}

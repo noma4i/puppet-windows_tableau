@@ -4,8 +4,11 @@ Simple way to install Tableau Server on target system.
 
 #### Available option
   `version` - You must define Tableau Server version(short format). During setup this will used to locate proper tabadmin
+  
   `trusted_host` - Used to setup `wgserver.trusted_hosts` and open correspondent TCP rule in windows firewall.
+  
   `type` - Installation type. Possible options: `local` or `remote`. Based on this puppet will download TablueServer installer from url or from puppet server.
+  
   `from` - URL or filename from puppet server
 
 #### How to use

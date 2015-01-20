@@ -2,7 +2,7 @@
 
 Simple way to install Tableau Server on target system.
 
-#### Available option
+#### Available options
   `version` - You must define Tableau Server version(short format). During setup this will used to locate proper tabadmin
   
   `trusted_host` - Used to setup `wgserver.trusted_hosts` and open correspondent TCP rule in windows firewall.

@@ -44,13 +44,6 @@ class windows_tableau (
           ensure  => file,
           source_permissions => ignore
         }
-        windows_firewall::exception { 'Tableau Server FW rules':
-          ensure       => present,
-          action       => 'Allow',
-          enabled      => 'yes',
-          remote_ip => $trusted_host
-          display_name => 'Tableau Server rule for trusted host'
-        }
       }
     }
     default: {

@@ -11,3 +11,6 @@ $obj = gwmi -namespace "Root/CIMV2/TerminalServices" Win32_TerminalServiceSettin
 $obj.SetSpecifiedLicenseServerList("localhost")
 $obj.ChangeMode(4)
 $obj.GetSpecifiedLicenseServerList()
+
+# Windows Firewall Setup
+netsh advfirewall firewall add rule name="Tableau Server allow HTTP" dir=in action=allow protocol=TCP remoteip=<%= scope.lookupvar('windows_tableau::trusted_host') %> localport=80

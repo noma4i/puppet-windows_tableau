@@ -37,11 +37,19 @@ class windows_tableau (
         exec { 'perform Tableau Setup':
           command  => template('windows_tableau/initial_setup.ps1.erb'),
           creates => 'C:\Program Files\Tableau\Tableau Server\initial_setup.flg',
-          provider => 'powershell'
+          provider => 'powershell',
+          timeout => 600
         }->
         file { 'C:\\Program Files\\Tableau\\Tableau Server\\initial_setup.flg':
           ensure  => file,
           source_permissions => ignore
+        }
+        windows_firewall::exception { 'Tableau Server FW rules':
+          ensure       => present,
+          action       => 'Allow',
+          enabled      => 'yes',
+          remote_ip => $trusted_host
+          display_name => 'Tableau Server rule for trusted host'
         }
       }
     }

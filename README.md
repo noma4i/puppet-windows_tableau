@@ -36,6 +36,7 @@ Not a problem! You are free to edit `templates/initial_setup.ps1.erb` and add yo
 
 - How to use `tabcmd` http://onlinehelp.tableausoftware.com/current/server/en-us/tabcmd_cmd.htm
 - How to use `tabadmin` http://onlinehelp.tableausoftware.com/current/server/en-us/tabadmin_cmd.htm
+
 #### Limitations
 
 If you are going to download Tableau with puppet from remote server, make sure that it will be fast enough. Puppet download known to be fussy about timeout. I'v made changes there but pull request is still pending https://github.com/opentable/puppet-download_file/pull/17

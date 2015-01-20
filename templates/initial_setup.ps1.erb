@@ -3,6 +3,7 @@ iex ".\tabadmin set wgserver.trusted_hosts '<%= scope.lookupvar('windows_tableau
 iex ".\tabadmin set vizqlserver.protect_sessions false"
 iex ".\tabadmin set wgserver.extended_trusted_ip_checking false"
 iex ".\tabadmin configure"
+iex ".\tabadmin restart"
 
 # Additional Setup Options!
 

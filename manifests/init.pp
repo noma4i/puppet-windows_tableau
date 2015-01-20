@@ -12,13 +12,13 @@ class windows_tableau (
         if $type == 'local'{
           $tablue_path = 'C:\\Users\\Administrator\\Desktop\\TableauServer-64bit.exe'
           file { 'c:\\ProgramData\\tableau.exe':
-            ensure              => file,
-            source_permissions  => ignore,
-            source              => "puppet:///${from}"
+            ensure             => file,
+            source_permissions => ignore,
+            source             => "puppet:///${from}"
           }
         }
         if $type == 'remote'{
-          download_file { "Download Tableau" :
+          download_file { 'Download Tableau' :
             url                   => $from,
             destination_directory => 'c:\\ProgramData',
             destination_file      => 'tableau.exe',
@@ -35,14 +35,14 @@ class windows_tableau (
           timeout => 90000
         }->
         exec { 'perform Tableau Setup':
-          command   => template('windows_tableau/initial_setup.ps1.erb'),
-          creates   => 'C:\Program Files\Tableau\Tableau Server\initial_setup.flg',
-          provider  => 'powershell',
-          timeout   => 600
+          command  => template('windows_tableau/initial_setup.ps1.erb'),
+          creates  => 'C:\Program Files\Tableau\Tableau Server\initial_setup.flg',
+          provider => 'powershell',
+          timeout  => 600
         }->
         file { 'C:\\Program Files\\Tableau\\Tableau Server\\initial_setup.flg':
-          ensure              => file,
-          source_permissions  => ignore
+          ensure             => file,
+          source_permissions => ignore
         }
       }
     }

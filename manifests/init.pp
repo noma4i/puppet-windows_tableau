@@ -1,6 +1,5 @@
 class windows_tableau (
   $ensure   = 'enabled',
-  $type = undef,
   $from = undef,
   $version = undef,
   $trusted_host = undef
@@ -8,21 +7,11 @@ class windows_tableau (
   case $ensure {
     'enabled', 'present': {
       File { source_permissions => ignore }
-      if $type == 'local'{
-        file { 'c:\\ProgramData\\tableau.exe':
-          ensure             => file,
-          source_permissions => ignore,
-          source             => "puppet:///${from}"
-        }
-      }
-      if $type == 'remote'{
-        download_file { 'Download Tableau' :
-          url                   => $from,
-          destination_directory => 'c:\\ProgramData',
-          destination_file      => 'tableau.exe',
-          timeout               => 90000
-        }
-      }
+      file { 'c:\\ProgramData\\tableau.exe':
+        ensure             => file,
+        source_permissions => ignore,
+        source             => "puppet:///${from}"
+      }->
       exec { 'Setup Tableau':
         command => 'c:\\ProgramData\\tableau.exe /verysilent',
         alias   => 'tableau-setup',
